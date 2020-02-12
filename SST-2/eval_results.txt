@@ -1,0 +1,9 @@
+acc = 0.926605504587156
+att_loss = 0.0
+cls_loss = 1.5862364330500933
+eval_loss = 0.3128788684095655
+fake_att_loss = 0.0
+global_step = 9799
+loss = 1.5862364330500933
+rep_loss = 0.0
+trans_loss = 0.0

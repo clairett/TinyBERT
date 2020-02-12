@@ -244,6 +244,10 @@ class Sst2Processor(DataProcessor):
         return self._create_examples(
             self._read_tsv(os.path.join(data_dir, "dev.tsv")), "dev")
 
+    def get_test_examples(self, data_dir):
+        return self._create_examples(
+            self._read_tsv(os.path.join(data_dir, "test.tsv")), "test")
+
     def get_aug_examples(self, data_dir):
         return self._create_examples(
             self._read_tsv(os.path.join(data_dir, "train_aug.tsv")), "aug")
@@ -843,7 +847,9 @@ def main():
         train_sampler = RandomSampler(train_data)
         train_dataloader = DataLoader(train_data, sampler=train_sampler, batch_size=args.train_batch_size)
 
-    eval_examples = processor.get_dev_examples(args.data_dir)
+    #eval_examples = processor.get_dev_examples(args.data_dir)
+    eval_examples = processor.get_test_examples(args.data_dir) #for SST-2 task, we have test examples
+
     eval_features = convert_examples_to_features(eval_examples, label_list, args.max_seq_length, tokenizer, output_mode)
     eval_data, eval_labels = get_tensor_data(output_mode, eval_features)
     eval_sampler = SequentialSampler(eval_data)
